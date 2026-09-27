@@ -248,6 +248,11 @@
               給付日数が90日 ➔ 150日に増加（差額: +約351,420円 ＆ すぐ受給開始）
             </p>
           </div>
+
+          <!-- クリップボードワンクリックコピーボタン（利便性・成約向上） -->
+          <button id="copy-result-btn" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center transition border border-slate-300">
+            <i class="fa-regular fa-copy mr-2 text-indigo-600"></i> この診断結果をコピーして保存・相談する
+          </button>
         </div>
 
         <!-- ★ アフィリエイト提案導線カード（競合トップ水準 高CVR心理技術 10大実装） -->
@@ -595,6 +600,23 @@
     }
 
     calculate();
+
+    // 診断結果コピー機能
+    const copyBtn = document.getElementById('copy-result-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = `【退職・手取り・失業保険 診断結果】\n・年齢: ${ageInput.value}歳 / 勤続年数: ${yearsInput.value}年\n・月給: ${salaryInput.value}万円 / 退職理由: ${reasonSelect.options[reasonSelect.selectedIndex].text}\n・受給総額見込み: ${resTotal.textContent} 円\n（内訳: 失業保険 ${resUnemployment.textContent} / 退職金手取り ${resSeveranceNet.textContent}）\n※退職金・失業保険シミュレーター調べ`;
+        navigator.clipboard.writeText(text).then(() => {
+          const original = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fa-solid fa-check text-emerald-600 mr-2"></i> コピーしました！';
+          copyBtn.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-700');
+          setTimeout(() => {
+            copyBtn.innerHTML = original;
+            copyBtn.classList.remove('bg-emerald-50', 'border-emerald-300', 'text-emerald-700');
+          }, 2000);
+        });
+      });
+    }
   </script>
 
 </body>

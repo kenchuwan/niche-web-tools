@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光回線・スマホ違約金相殺＆乗り換え削減診断シミュレーター【2026年最新版】</title>
+  <meta name="description" content="乗り換え時の違約金・工事費残債とキャッシュバックを完全相殺！3年間でいくら固定費が浮くかを10秒で無料自動試算します。">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #2563eb;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased pb-24 md:pb-12">
+
+  <!-- ヘッダー -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <a href="../../" class="text-xs text-slate-500 hover:text-slate-800 flex items-center mr-2">
+          <i class="fa-solid fa-arrow-left mr-1"></i> ポータル
+        </a>
+        <span class="bg-blue-600 text-white text-xs font-black px-2 py-0.5 rounded">通信費見直し</span>
+        <h1 class="text-sm md:text-base font-bold text-slate-900 truncate">光回線・違約金相殺＆乗り換え削減シミュレーター</h1>
+      </div>
+      <div class="flex items-center space-x-2 text-xs text-slate-500">
+        <span class="hidden sm:inline bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold border border-emerald-200">
+          <i class="fa-solid fa-bolt mr-1"></i> 2026年最新回線プラン対応
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="max-w-5xl mx-auto px-4 py-6 md:py-8 space-y-6">
+
+    <!-- ヒーロー・訴求バナー -->
+    <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-indigo-800 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+      <div class="max-w-2xl relative z-10">
+        <span class="inline-block bg-white/20 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-full mb-2">
+          💡 違約金・解約金をキャッシュバックで満額ゼロ相殺
+        </span>
+        <h2 class="text-xl sm:text-2xl font-black leading-snug">
+          「違約金がかかるから解約できない」は完全な大損！<br class="hidden sm:inline">乗り換えで手元にいくら残るか瞬時に診断
+        </h2>
+        <p class="text-xs sm:text-sm text-blue-100 mt-2 leading-relaxed">
+          現行の月額料金と解約費用を入力するだけで、乗り換え特典（解約金全額補填＋工事費実質0円）を考慮した「3年間の純節約額」をリアルタイム計算します。
+        </p>
+      </div>
+    </div>
+
+    <!-- シミュレーター入力・出力グリッド -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- 左側：入力パネル (5列) -->
+      <section class="lg:col-span-5 bg-white rounded-2xl p-5 md:p-6 border border-slate-200 shadow-sm space-y-5">
+        <h3 class="text-base font-bold text-slate-900 pb-2 border-b border-slate-100 flex items-center">
+          <i class="fa-solid fa-sliders text-blue-600 mr-2"></i> 現在の契約条件を入力
+        </h3>
+
+        <!-- 現在の光回線・ネット月額 -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs font-bold text-slate-700">現在の光回線 月額料金 (税込)</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="current-net" min="3000" max="15000" step="100" value="5800" class="w-20 text-right font-bold text-sm border border-slate-300 rounded px-2 py-0.5 font-mono focus:ring-2 focus:ring-blue-500">
+              <span class="text-xs font-bold text-slate-600">円</span>
+            </div>
+          </div>
+          <input type="range" id="current-net-range" min="3000" max="12000" step="100" value="5800" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+            <span>3,000円</span>
+            <span>戸建て平均(5,700円)</span>
+            <span>12,000円</span>
+          </div>
+        </div>
+
+        <!-- 現在のスマホ代 (1台〜複数台合計) -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs font-bold text-slate-700">現在のスマホ代 月額合計 (税込)</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="current-mobile" min="1000" max="30000" step="500" value="7000" class="w-20 text-right font-bold text-sm border border-slate-300 rounded px-2 py-0.5 font-mono focus:ring-2 focus:ring-blue-500">
+              <span class="text-xs font-bold text-slate-600">円</span>
+            </div>
+          </div>
+          <input type="range" id="current-mobile-range" min="1000" max="25000" step="500" value="7000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+            <span>格安SIM(1,000円)</span>
+            <span>大手キャリア(7,000円)</span>
+            <span>家族複数台(25,000円)</span>
+          </div>
+        </div>
+
+        <!-- 想定される解約費用（違約金＋工事費残債） -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-xs font-bold text-slate-700">解約違約金 ＋ 工事費残債</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="penalty" min="0" max="80000" step="1000" value="15000" class="w-20 text-right font-bold text-sm border border-slate-300 rounded px-2 py-0.5 font-mono focus:ring-2 focus:ring-blue-500">
+              <span class="text-xs font-bold text-slate-600">円</span>
+            </div>
+          </div>
+          <input type="range" id="penalty-range" min="0" max="60000" step="1000" value="15000" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+            <span>0円 (更新月)</span>
+            <span>一般的な違約金(約1.5万円)</span>
+            <span>残債多数(6万円)</span>
+          </div>
+        </div>
+
+        <!-- 住居タイプ -->
+        <div>
+          <label class="text-xs font-bold text-slate-700 block mb-1">住居タイプ</label>
+          <div class="grid grid-cols-2 gap-2">
+            <button type="button" id="btn-mansion" class="py-2 text-xs font-bold rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition">
+              🏢 マンション・集合住宅
+            </button>
+            <button type="button" id="btn-house" class="py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-slate-300 transition">
+              🏡 戸建て
+            </button>
+          </div>
+        </div>
+
+        <!-- 乗り換えプランの想定水準 -->
+        <div class="pt-2 border-t border-slate-100">
+          <label class="text-xs font-bold text-slate-700 block mb-1">乗り換え先での見直し方針</label>
+          <select id="switch-plan-mode" class="w-full text-xs font-bold border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:ring-2 focus:ring-blue-500">
+            <option value="both" selected>光回線 ＋ スマホ格安化（最大削減コース）</option>
+            <option value="net_only">光回線のみ乗り換え（スマホはそのまま）</option>
+            <option value="sim_only">スマホのみ格安SIMへ（回線はそのまま）</option>
+          </select>
+        </div>
+
+      </section>
+
+      <!-- 右側：計算結果表示エリア (7列) -->
+      <section class="lg:col-span-7 space-y-4">
+
+        <!-- メインサマリカード -->
+        <div class="bg-gradient-to-br from-slate-900 via-indigo-950 to-blue-950 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden border border-blue-500/30">
+          <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 font-black pointer-events-none select-none">SAVE</div>
+          <span class="text-[11px] font-bold text-blue-300 uppercase tracking-wider block">Net 3-Year Savings</span>
+          <h3 class="text-sm text-slate-300 mt-0.5">乗り換えによる3年間の純節約額（違約金相殺後）</h3>
+
+          <div class="mt-3 flex items-baseline space-x-2">
+            <span class="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight font-mono" id="res-three-year">約 212,400</span>
+            <span class="text-sm font-bold text-slate-300">円 おトク！</span>
+          </div>
+
+          <!-- 月額削減＆解約金相殺バッジ -->
+          <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-blue-800/60 text-xs">
+            <div class="bg-white/10 rounded-xl p-3">
+              <span class="text-slate-300 text-[11px] block font-bold">📉 月々の固定費 削減額</span>
+              <span class="text-base font-black text-emerald-400 font-mono mt-0.5 block" id="res-monthly-save">毎月 約 5,900 円</span>
+              <span class="text-[10px] text-slate-300 mt-1 block">年換算: <strong id="res-yearly-save" class="text-white">約 70,800円</strong> 浮く</span>
+            </div>
+
+            <div class="bg-white/10 rounded-xl p-3">
+              <span class="text-slate-300 text-[11px] block font-bold">🎁 違約金相殺＆特典額</span>
+              <span class="text-base font-black text-amber-300 font-mono mt-0.5 block" id="res-cb-amount">約 40,000 円</span>
+              <span class="text-[10px] text-emerald-300 mt-1 block font-bold" id="res-offset-badge">違約金を全額相殺してプラス！</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 比較詳細テーブル -->
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3 text-xs">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center">
+              <i class="fa-solid fa-scale-balanced text-blue-600 mr-2"></i>
+              現在と乗り換え後の月額費用の比較
+            </h4>
+            <span class="text-[11px] font-bold text-blue-600 font-mono">マンション / 3年間試算</span>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 bg-rose-50/60 rounded-xl border border-rose-100">
+              <span class="text-rose-600 font-bold block text-[11px]">現在（そのまま継続）</span>
+              <div class="mt-1 space-y-0.5 text-slate-600">
+                <div class="flex justify-between"><span>光回線:</span> <strong id="cur-net-val">5,800円</strong></div>
+                <div class="flex justify-between"><span>スマホ:</span> <strong id="cur-mob-val">7,000円</strong></div>
+                <div class="flex justify-between pt-1 border-t border-rose-200 text-slate-900 font-bold">
+                  <span>月合計:</span> <span id="cur-sum-val" class="font-mono text-rose-600">12,800円</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100">
+              <span class="text-emerald-700 font-bold block text-[11px]">見直し後（高コスパ回線＋SIM）</span>
+              <div class="mt-1 space-y-0.5 text-slate-600">
+                <div class="flex justify-between"><span>光回線:</span> <strong id="new-net-val">3,800円</strong></div>
+                <div class="flex justify-between"><span>スマホ:</span> <strong id="new-mob-val">3,100円</strong></div>
+                <div class="flex justify-between pt-1 border-t border-emerald-200 text-slate-900 font-bold">
+                  <span>月合計:</span> <span id="new-sum-val" class="font-mono text-emerald-600">6,900円</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- クリップボードワンクリックコピーボタン -->
+          <button id="copy-result-btn" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-bold text-xs flex items-center justify-center transition border border-slate-300">
+            <i class="fa-regular fa-copy mr-2 text-blue-600"></i> この診断結果（節約額）をコピーして保存する
+          </button>
+        </div>
+
+        <!-- ★ 高単価アフィリエイト連携カード（光回線・SIM案件: 単価1.5〜2.5万円） -->
+        <div class="bg-gradient-to-br from-indigo-950/70 to-slate-900 rounded-2xl p-5 border border-indigo-500/40 space-y-4">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-black text-amber-300 flex items-center">
+              <i class="fa-solid fa-gift mr-1.5 text-amber-400"></i>
+              違約金満額還元＆高額キャッシュバック対象プロバイダ
+            </span>
+            <span class="text-[9px] font-bold text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">公式提携・PR</span>
+          </div>
+
+          <div class="space-y-3">
+            <!-- 案件1: GMOとくとくBB光 / 高額キャッシュバック -->
+            <a href="https://example.com/broadband-affiliate" target="_blank" rel="noopener noreferrer sponsored" class="p-3.5 bg-slate-900/90 rounded-xl border border-slate-700 hover:border-amber-400 transition block group">
+              <div class="flex items-center justify-between mb-1">
+                <div class="flex items-center space-x-2">
+                  <span class="font-bold text-white text-xs group-hover:text-amber-300">GMOとくとくBB光（v6プラス対応）</span>
+                  <span class="text-[9px] font-bold text-emerald-400 bg-emerald-950 px-1.5 py-0.5 rounded">違約金全額負担</span>
+                </div>
+                <span class="text-xs text-amber-400 font-bold group-hover:translate-x-1 transition">詳細を見る →</span>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed mt-1">
+                契約期間の縛りなし・解約金0円。他社からの乗り換え違約金を最大60,000円までキャッシュバック還元。
+              </p>
+              <div class="flex items-center space-x-3 mt-2 text-[10px] text-slate-400">
+                <span>🛡️ 工事費実質無料</span>
+                <span>⚡ 超高速IPv6標準</span>
+                <span>🎁 限定キャッシュバック特典あり</span>
+              </div>
+            </a>
+
+            <!-- 案件2: 楽天モバイル＋楽天ひかりセット -->
+            <a href="https://example.com/mobile-affiliate" target="_blank" rel="noopener noreferrer sponsored" class="p-3.5 bg-slate-900/90 rounded-xl border border-slate-700 hover:border-blue-400 transition block group">
+              <div class="flex items-center justify-between mb-1">
+                <div class="flex items-center space-x-2">
+                  <span class="font-bold text-white text-xs group-hover:text-blue-300">楽天モバイル（Rakuten最強プラン）</span>
+                  <span class="text-[9px] font-bold text-blue-400 bg-blue-950 px-1.5 py-0.5 rounded">データ無制限2,980円</span>
+                </div>
+                <span class="text-xs text-blue-400 font-bold group-hover:translate-x-1 transition">詳細を見る →</span>
+              </div>
+              <p class="text-[11px] text-slate-300 leading-relaxed mt-1">
+                大手3キャリアから乗り換えるだけで毎月4,000円以上の固定費削減。店舗・オンラインで即日乗り換え完了。
+              </p>
+            </a>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- よくある質問（FAQ）SEO強化＆安心感向上 -->
+    <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4">
+      <h3 class="text-sm md:text-base font-bold text-slate-900 flex items-center">
+        <i class="fa-solid fa-circle-question text-blue-600 mr-2"></i>
+        光回線・スマホ乗り換えに関するよくある疑問
+      </h3>
+
+      <div class="space-y-3 text-xs text-slate-600">
+        <div class="p-3 bg-slate-50 rounded-xl">
+          <div class="font-bold text-slate-900 mb-1">Q. 違約金や工事費残債の補填はどうやって受け取るのですか？</div>
+          <p>
+            多くの乗り換えキャンペーンでは、現行キャリアの最終請求明細（解約金・工事費が記載された画面）を写真やPDFで新プロバイダに送信することで、口座振込や郵便為替などで全額補填されます。
+          </p>
+        </div>
+
+        <div class="p-3 bg-slate-50 rounded-xl">
+          <div class="font-bold text-slate-900 mb-1">Q. 光回線を乗り換えると工事でネットが使えない期間はありますか？</div>
+          <p>
+            現在フレッツ光や他社光コラボ（ドコモ光、ソフトバンク光等）をご利用中の場合、「事業者変更」という手続きになり、立ち会い工事なし・ネットが途切れることなく数日で自動切り替えが完了します。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- スマホ固定追従CTAバー（高CVR設計） -->
+  <div class="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-md border-t border-slate-800 p-3 sm:hidden z-50 flex items-center justify-between">
+    <div>
+      <span class="text-[10px] text-slate-400 block">3年間の純節約見込み額</span>
+      <span class="text-lg font-black text-amber-400 font-mono" id="floating-save-total">約 212,400円</span>
+    </div>
+    <a href="https://example.com/broadband-affiliate" target="_blank" rel="noopener noreferrer sponsored" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-xs rounded-xl shadow-lg flex items-center">
+      特典を確認する <i class="fa-solid fa-chevron-right ml-1 text-[10px]"></i>
+    </a>
+  </div>
+
+  <!-- 計算スクリプト -->
+  <script>
+    const elCurrentNet = document.getElementById('current-net');
+    const elCurrentNetRange = document.getElementById('current-net-range');
+    const elCurrentMobile = document.getElementById('current-mobile');
+    const elCurrentMobileRange = document.getElementById('current-mobile-range');
+    const elPenalty = document.getElementById('penalty');
+    const elPenaltyRange = document.getElementById('penalty-range');
+    const btnMansion = document.getElementById('btn-mansion');
+    const btnHouse = document.getElementById('btn-house');
+    const elPlanMode = document.getElementById('switch-plan-mode');
+
+    let houseType = 'mansion'; // 'mansion' or 'house'
+
+    function sync(input, range) {
+      input.addEventListener('input', () => { range.value = input.value; calculate(); });
+      range.addEventListener('input', () => { input.value = range.value; calculate(); });
+    }
+    sync(elCurrentNet, elCurrentNetRange);
+    sync(elCurrentMobile, elCurrentMobileRange);
+    sync(elPenalty, elPenaltyRange);
+
+    btnMansion.addEventListener('click', () => {
+      houseType = 'mansion';
+      btnMansion.className = 'py-2 text-xs font-bold rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition';
+      btnHouse.className = 'py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-slate-300 transition';
+      calculate();
+    });
+
+    btnHouse.addEventListener('click', () => {
+      houseType = 'house';
+      btnHouse.className = 'py-2 text-xs font-bold rounded-xl border border-blue-600 bg-blue-50 text-blue-700 transition';
+      btnMansion.className = 'py-2 text-xs font-bold rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-slate-300 transition';
+      calculate();
+    });
+
+    elPlanMode.addEventListener('change', calculate);
+
+    function calculate() {
+      const curNet = parseFloat(elCurrentNet.value) || 0;
+      const curMob = parseFloat(elCurrentMobile.value) || 0;
+      const penalty = parseFloat(elPenalty.value) || 0;
+      const mode = elPlanMode.value;
+
+      // 新プラン想定単価
+      let newNet = houseType === 'mansion' ? 3800 : 4800;
+      let newMob = 3100; // 格安SIM標準（20GB水準）
+      let cashback = 40000; // 平均違約金補填＋CB
+
+      if (mode === 'net_only') {
+        newMob = curMob;
+      } else if (mode === 'sim_only') {
+        newNet = curNet;
+        cashback = 10000;
+      }
+
+      // 差額試算
+      const curMonthly = curNet + curMob;
+      const newMonthly = newNet + newMob;
+      const monthlySave = Math.max(0, curMonthly - newMonthly);
+      const yearlySave = monthlySave * 12;
+
+      // 3年試算 (36ヶ月)
+      // 3年間削減額 = (月削減額 * 36) + 特典キャッシュバック - 解約違約金
+      const threeYearTotal = (monthlySave * 36) + (cashback - penalty);
+
+      // DOM反映
+      document.getElementById('res-three-year').textContent = `約 ${threeYearTotal.toLocaleString()}`;
+      document.getElementById('floating-save-total').textContent = `約 ${threeYearTotal.toLocaleString()}円`;
+      document.getElementById('res-monthly-save').textContent = `毎月 約 ${monthlySave.toLocaleString()} 円`;
+      document.getElementById('res-yearly-save').textContent = `約 ${yearlySave.toLocaleString()}円`;
+      document.getElementById('res-cb-amount').textContent = `約 ${cashback.toLocaleString()} 円`;
+
+      const offsetBadge = document.getElementById('res-offset-badge');
+      if (cashback >= penalty) {
+        offsetBadge.textContent = `違約金を全額相殺して+${(cashback - penalty).toLocaleString()}円黒字！`;
+        offsetBadge.className = 'text-[10px] text-emerald-300 mt-1 block font-bold';
+      } else {
+        offsetBadge.textContent = `解約金差引後も月々削減で${Math.ceil((penalty - cashback) / (monthlySave || 1))}ヶ月で回収`;
+        offsetBadge.className = 'text-[10px] text-amber-300 mt-1 block font-bold';
+      }
+
+      document.getElementById('cur-net-val').textContent = `${curNet.toLocaleString()}円`;
+      document.getElementById('cur-mob-val').textContent = `${curMob.toLocaleString()}円`;
+      document.getElementById('cur-sum-val').textContent = `${curMonthly.toLocaleString()}円`;
+
+      document.getElementById('new-net-val').textContent = `${newNet.toLocaleString()}円`;
+      document.getElementById('new-mob-val').textContent = `${newMob.toLocaleString()}円`;
+      document.getElementById('new-sum-val').textContent = `${newMonthly.toLocaleString()}円`;
+    }
+
+    calculate();
+
+    // コピー機能
+    const copyBtn = document.getElementById('copy-result-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const text = `【光回線・スマホ乗り換え削減診断結果】\n・現在月額: ${(parseFloat(elCurrentNet.value) + parseFloat(elCurrentMobile.value)).toLocaleString()}円 ➔ 乗り換え後: 約${document.getElementById('new-sum-val').textContent}\n・毎月の固定費削減: ${document.getElementById('res-monthly-save').textContent}\n・3年間の純節約総額: ${document.getElementById('res-three-year').textContent} 円（違約金相殺後）\n※光回線・違約金相殺シミュレーター調べ`;
+        navigator.clipboard.writeText(text).then(() => {
+          const original = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<i class="fa-solid fa-check text-emerald-600 mr-2"></i> コピーしました！';
+          copyBtn.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-700');
+          setTimeout(() => {
+            copyBtn.innerHTML = original;
+            copyBtn.classList.remove('bg-emerald-50', 'border-emerald-300', 'text-emerald-700');
+          }, 2000);
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
