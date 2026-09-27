@@ -1,0 +1,18 @@
+{
+  "tool_id": "job-quit-simulator",
+  "title": "退職金・手取り・失業保険 概算シミュレーター",
+  "description": "月収・勤続年数・年齢から失業保険の受給総額・日数と退職金の手取り額をリアルタイム計算する無料ツール",
+  "target_keywords": [
+    "失業保険 計算",
+    "退職金 手取り 計算",
+    "失業手当 シミュレーター",
+    "退職金 控除"
+  ],
+  "affiliate_category": "退職代行 / 転職エージェント",
+  "affiliate_target_bounties": "10,000円〜30,000円 / 件",
+  "status": "実装完了（ローカルプレビュー中）",
+  "created_date": "2026-09-27",
+  "published_date": null,
+  "canonical_url": null,
+  "notes": "第1号キラーツール。厚生労働省雇用保険基準に準拠。非弁行為回避の免責事項およびPR表記実装済み。"
+}
