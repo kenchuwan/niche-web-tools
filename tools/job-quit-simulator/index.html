@@ -6,7 +6,7 @@
   <title>【2026年最新】退職金・手取り・失業保険 概算シミュレーター | 無料計算ツール</title>
 
   <!-- SEO メタタグ -->
-  <meta name="description" content="【登録不要・完全無料】退職金の手取り額と失業保険（雇用保険基本手当）の受給総額・受給日数を10秒でリアルタイム試算。2026年最新の法令基準に対応。会社都合・自己都合の受給差額も一目で分かります。">
+  <meta name="description" content="【登録不要・完全無料】退職金の手取り額と失業保険（雇用保険基本手当）の受給総額・日数を10秒でリアルタイム試算。2026年最新の法令基準に対応。会社都合・自己都合の受給差額も一目で分かります。">
   <meta name="keywords" content="失業保険 計算, 退職金 手取り 計算, 失業手当 シミュレーター, 退職金 控除, 自己都合 会社都合 違い">
   <meta name="robots" content="index, follow">
 
@@ -31,26 +31,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", sans-serif; }
-    .slider-thumb::-webkit-slider-thumb {
-      appearance: none;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #4f46e5;
-      cursor: pointer;
-    }
+    input[type=range] { accent-color: #4f46e5; }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 min-h-screen antialiased flex flex-col justify-between">
 
   <!-- ヘッダー -->
   <header class="bg-white border-b border-slate-200 shadow-sm sticky top-0 z-40">
-    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <div class="max-w-5xl mx-auto px-4 py-3.5 flex items-center justify-between">
       <div class="flex items-center space-x-2.5">
         <span class="text-2xl">💰</span>
         <div>
           <h1 class="text-base font-extrabold text-slate-900 leading-tight">退職金・手取り・失業保険シミュレーター</h1>
-          <p class="text-[11px] text-slate-500">2026年最新法令準拠 | 完全無料・登録不要</p>
+          <p class="text-[11px] text-slate-500">2026年最新基準準拠 | 完全無料・登録不要・リアルタイム連動</p>
         </div>
       </div>
       <span class="text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded border border-slate-200">
@@ -60,99 +53,126 @@
   </header>
 
   <!-- メインコンテンツ -->
-  <main class="max-w-4xl mx-auto px-4 py-6 space-y-6 flex-1 w-full">
+  <main class="max-w-5xl mx-auto px-4 py-6 space-y-6 flex-1 w-full">
 
     <!-- 導入バナー -->
     <div class="bg-indigo-50 border border-indigo-200 rounded-xl p-4 text-xs text-indigo-900 flex items-start space-x-3">
       <i class="fa-solid fa-circle-info text-indigo-600 text-sm mt-0.5"></i>
       <div>
         <p class="font-bold">「退職したらいくら入る？」が10秒でわかるシミュレーター</p>
-        <p class="text-indigo-700/90 mt-0.5">月収・勤続年数を入力するだけで、失業手当の総額と退職金の手取り見込みを自動計算します。データは送信されず安全です。</p>
+        <p class="text-indigo-700/90 mt-0.5">
+          月収・勤続年数・年齢を動かすと、受給総額・月額・給付日数・手取り額が<strong>すべてリアルタイムで連動計算</strong>されます。
+        </p>
       </div>
     </div>
 
     <!-- 入力 ＆ 計算結果 グリッド -->
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
       <!-- 左側：入力フォーム (5列) -->
-      <section class="md:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-        <h2 class="text-sm font-bold text-slate-900 flex items-center pb-2 border-b border-slate-100">
-          <i class="fa-solid fa-sliders text-indigo-600 mr-2"></i>
-          条件を入力する
-        </h2>
+      <section class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <h2 class="text-sm font-bold text-slate-900 flex items-center">
+            <i class="fa-solid fa-sliders text-indigo-600 mr-2"></i>
+            条件を入力する
+          </h2>
+          <span class="text-[10px] text-slate-400">スライダー or 直接入力</span>
+        </div>
 
-        <!-- 月収 -->
+        <!-- 1. 月収 -->
         <div>
           <div class="flex justify-between items-center mb-1">
-            <label for="salary" class="text-xs font-bold text-slate-700">退職前6ヶ月の平均月収 (額面)</label>
-            <span id="salary-val" class="text-xs font-black text-indigo-600 font-mono">30 万円</span>
+            <label for="salary-num" class="text-xs font-bold text-slate-700">退職前6ヶ月の平均月収 (額面)</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="salary-num" min="10" max="200" value="30" class="w-16 px-1.5 py-0.5 text-xs font-black text-indigo-600 border border-slate-300 rounded text-right focus:outline-none focus:border-indigo-600">
+              <span class="text-xs font-bold text-slate-600">万円</span>
+            </div>
           </div>
-          <input type="range" id="salary" min="15" max="100" step="1" value="30" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+          <input type="range" id="salary-range" min="10" max="150" step="1" value="30" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
           <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
-            <span>15万</span>
+            <span>10万</span>
             <span>50万</span>
-            <span>100万</span>
+            <span>150万</span>
           </div>
         </div>
 
-        <!-- 勤続年数 -->
+        <!-- 2. 年齢（ここが重要！） -->
         <div>
           <div class="flex justify-between items-center mb-1">
-            <label for="years" class="text-xs font-bold text-slate-700">会社の勤続年数</label>
-            <span id="years-val" class="text-xs font-black text-indigo-600 font-mono">5 年</span>
+            <label for="age-num" class="text-xs font-bold text-slate-700">退職時の年齢</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="age-num" min="20" max="64" value="32" class="w-16 px-1.5 py-0.5 text-xs font-black text-indigo-600 border border-slate-300 rounded text-right focus:outline-none focus:border-indigo-600">
+              <span class="text-xs font-bold text-slate-600">歳</span>
+            </div>
           </div>
-          <input type="range" id="years" min="1" max="40" step="1" value="5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+          <input type="range" id="age-range" min="20" max="64" step="1" value="32" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
+          <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
+            <span>20歳 (若年)</span>
+            <span>30〜44歳</span>
+            <span>45〜59歳</span>
+            <span>60〜64歳</span>
+          </div>
+          <!-- 年齢区分インジケーター（リアルタイム反映） -->
+          <div class="mt-2 p-2 bg-indigo-50/70 rounded-lg border border-indigo-100 flex items-center justify-between text-[11px]">
+            <span class="text-indigo-900 font-bold" id="age-badge">30〜44歳の区分</span>
+            <span class="text-indigo-700 font-mono text-[10px]" id="age-cap-info">基本日額上限: 7,900円</span>
+          </div>
+        </div>
+
+        <!-- 3. 勤続年数 -->
+        <div>
+          <div class="flex justify-between items-center mb-1">
+            <label for="years-num" class="text-xs font-bold text-slate-700">会社の勤続年数</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="years-num" min="1" max="45" value="5" class="w-16 px-1.5 py-0.5 text-xs font-black text-indigo-600 border border-slate-300 rounded text-right focus:outline-none focus:border-indigo-600">
+              <span class="text-xs font-bold text-slate-600">年</span>
+            </div>
+          </div>
+          <input type="range" id="years-range" min="1" max="40" step="1" value="5" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
           <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
             <span>1年</span>
+            <span>10年</span>
             <span>20年</span>
             <span>40年</span>
           </div>
-        </div>
-
-        <!-- 年齢 -->
-        <div>
-          <div class="flex justify-between items-center mb-1">
-            <label for="age" class="text-xs font-bold text-slate-700">退職時の年齢</label>
-            <span id="age-val" class="text-xs font-black text-indigo-600 font-mono">32 歳</span>
-          </div>
-          <input type="range" id="age" min="20" max="64" step="1" value="32" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
-          <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
-            <span>20歳</span>
-            <span>45歳</span>
-            <span>64歳</span>
+          <div class="text-[10px] text-slate-500 mt-1" id="deduction-info">
+            退職所得控除額: 200万円（この金額まで非課税）
           </div>
         </div>
 
-        <!-- 退職理由 -->
+        <!-- 4. 退職理由 -->
         <div>
-          <label class="text-xs font-bold text-slate-700 block mb-1.5">退職理由</label>
+          <label class="text-xs font-bold text-slate-700 block mb-1.5">退職理由（給付日数・受給時期に直結）</label>
           <div class="grid grid-cols-2 gap-2 text-xs">
             <label class="flex items-center p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition has-[:checked]:border-indigo-600 has-[:checked]:bg-indigo-50/50">
               <input type="radio" name="reason" value="self" checked class="text-indigo-600 focus:ring-indigo-500 mr-2">
               <div>
-                <span class="font-bold text-slate-800 block text-xs">自己都合</span>
-                <span class="text-[10px] text-slate-400">転職・自己退職</span>
+                <span class="font-bold text-slate-800 block text-xs">自己都合退職</span>
+                <span class="text-[10px] text-slate-400">給付制限2ヶ月あり</span>
               </div>
             </label>
             <label class="flex items-center p-2.5 rounded-lg border border-slate-200 cursor-pointer hover:bg-slate-50 transition has-[:checked]:border-indigo-600 has-[:checked]:bg-indigo-50/50">
               <input type="radio" name="reason" value="company" class="text-indigo-600 focus:ring-indigo-500 mr-2">
               <div>
-                <span class="font-bold text-slate-800 block text-xs">会社都合</span>
-                <span class="text-[10px] text-slate-400">解雇・倒産・病気等</span>
+                <span class="font-bold text-emerald-800 block text-xs">会社都合退職 ★</span>
+                <span class="text-[10px] text-emerald-600 font-bold">待期7日のみ・日数大幅増</span>
               </div>
             </label>
           </div>
         </div>
 
-        <!-- 退職金（任意） -->
+        <!-- 5. 退職金（任意） -->
         <div class="pt-2 border-t border-slate-100">
           <div class="flex justify-between items-center mb-1">
-            <label for="severance" class="text-xs font-bold text-slate-700">退職金の予定額 (額面)</label>
-            <span id="severance-val" class="text-xs font-black text-indigo-600 font-mono">100 万円</span>
+            <label for="severance-num" class="text-xs font-bold text-slate-700">退職金の支給予定額 (額面)</label>
+            <div class="flex items-center space-x-1">
+              <input type="number" id="severance-num" min="0" max="3000" step="10" value="100" class="w-16 px-1.5 py-0.5 text-xs font-black text-indigo-600 border border-slate-300 rounded text-right focus:outline-none focus:border-indigo-600">
+              <span class="text-xs font-bold text-slate-600">万円</span>
+            </div>
           </div>
-          <input type="range" id="severance" min="0" max="2000" step="50" value="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+          <input type="range" id="severance-range" min="0" max="2000" step="50" value="100" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer">
           <div class="flex justify-between text-[10px] text-slate-400 mt-0.5">
-            <span>0円</span>
+            <span>0円 (なし)</span>
             <span>1,000万</span>
             <span>2,000万</span>
           </div>
@@ -161,46 +181,55 @@
       </section>
 
       <!-- 右側：計算結果表示エリア (7列) -->
-      <section class="md:col-span-7 space-y-4">
+      <section class="lg:col-span-7 space-y-4">
 
         <!-- メインサマリカード -->
-        <div class="bg-gradient-to-br from-indigo-900 to-slate-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
-          <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 font-black pointer-events-none">¥</div>
+        <div class="bg-gradient-to-br from-indigo-950 via-slate-900 to-indigo-900 rounded-2xl p-6 text-white shadow-xl relative overflow-hidden border border-indigo-500/30">
+          <div class="absolute -right-4 -bottom-4 text-8xl text-white/5 font-black pointer-events-none select-none">¥</div>
           <span class="text-[11px] font-bold text-indigo-300 uppercase tracking-wider block">Estimated Total Benefit</span>
-          <h3 class="text-sm text-slate-300 mt-1">退職後に受け取れる合計見込み額</h3>
+          <h3 class="text-sm text-slate-300 mt-0.5">退職後に受け取れる合計見込み額</h3>
           
           <div class="mt-3 flex items-baseline space-x-2">
-            <span class="text-3xl md:text-4xl font-black text-amber-400 tracking-tight" id="res-total">約 1,745,000</span>
+            <span class="text-3xl sm:text-4xl font-black text-amber-400 tracking-tight font-mono" id="res-total">約 1,527,130</span>
             <span class="text-sm font-bold text-slate-300">円</span>
           </div>
 
           <!-- 内訳バッジ -->
-          <div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-indigo-800/60 text-xs">
-            <div class="bg-white/10 rounded-lg p-2.5">
-              <span class="text-slate-300 text-[11px] block">💰 失業保険 (受給総額)</span>
-              <span class="text-sm font-bold text-white font-mono mt-0.5 block" id="res-unemployment">約 745,000 円</span>
-              <span class="text-[10px] text-indigo-200" id="res-days">給付日数: 90日</span>
+          <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-indigo-800/60 text-xs">
+            <div class="bg-white/10 rounded-xl p-3">
+              <span class="text-slate-300 text-[11px] block font-bold">💰 失業保険 (受給総額)</span>
+              <span class="text-base font-black text-white font-mono mt-0.5 block" id="res-unemployment">約 527,130 円</span>
+              <div class="flex items-center space-x-1 mt-1">
+                <span class="px-1.5 py-0.5 rounded bg-indigo-500/40 text-[10px] text-indigo-200 font-bold" id="res-days">給付日数: 90日</span>
+                <span class="px-1.5 py-0.5 rounded bg-white/20 text-[10px] text-slate-200 font-mono" id="res-daily">日額 5,857円</span>
+              </div>
             </div>
-            <div class="bg-white/10 rounded-lg p-2.5">
-              <span class="text-slate-300 text-[11px] block">💼 退職金 (手取り概算)</span>
-              <span class="text-sm font-bold text-white font-mono mt-0.5 block" id="res-severance-net">約 1,000,000 円</span>
-              <span class="text-[10px] text-indigo-200" id="res-tax">控除内 (非課税)</span>
+
+            <div class="bg-white/10 rounded-xl p-3">
+              <span class="text-slate-300 text-[11px] block font-bold">💼 退職金 (手取り概算)</span>
+              <span class="text-base font-black text-white font-mono mt-0.5 block" id="res-severance-net">約 1,000,000 円</span>
+              <div class="mt-1">
+                <span class="px-1.5 py-0.5 rounded text-[10px] font-bold" id="res-tax-badge">控除内 (非課税)</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- 給付金詳細タイムラインカード -->
+        <!-- 年齢＆退職理由の動的比較インサイトカード（ここが決定的にわかりやすい！） -->
         <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm space-y-3 text-xs">
-          <h4 class="font-bold text-slate-900 text-sm flex items-center">
-            <i class="fa-solid fa-calendar-days text-indigo-600 mr-2"></i>
-            失業保険の受給スケジュール・月額目安
-          </h4>
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-slate-900 text-sm flex items-center">
+              <i class="fa-solid fa-scale-balanced text-indigo-600 mr-2"></i>
+              現在の年齢・条件に応じた受給詳細
+            </h4>
+            <span class="text-[11px] font-bold text-indigo-600 font-mono" id="res-rule-label">自己都合 / 30〜44歳</span>
+          </div>
 
           <div class="grid grid-cols-2 gap-3">
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <span class="text-slate-500 block text-[11px]">月額相当の給付額</span>
-              <span class="text-base font-black text-slate-800 font-mono mt-1 block" id="res-monthly">約 186,000 円</span>
-              <span class="text-[10px] text-slate-400">（基本手当日額 × 30日）</span>
+              <span class="text-slate-500 block text-[11px]">月額換算（30日分）</span>
+              <span class="text-base font-black text-slate-800 font-mono mt-1 block" id="res-monthly">約 175,710 円</span>
+              <span class="text-[10px] text-slate-400" id="res-cap-status">※年齢上限（7,900円）以内</span>
             </div>
             <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
               <span class="text-slate-500 block text-[11px]">受給開始の目安時期</span>
@@ -208,14 +237,25 @@
               <span class="text-[10px] text-slate-400" id="res-wait-desc">7日待期 ＋ 給付制限2ヶ月</span>
             </div>
           </div>
+
+          <!-- 会社都合にした場合の差額インパクト提示 -->
+          <div class="p-3 rounded-xl border transition" id="company-impact-box">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-slate-800 text-[11px]">💡 もし「会社都合」扱いになった場合の給付総額:</span>
+              <span class="font-black text-emerald-600 font-mono text-sm" id="res-company-total">約 878,550 円</span>
+            </div>
+            <p class="text-[10px] text-slate-500 mt-1" id="res-company-diff">
+              給付日数が90日 ➔ 150日に増加（差額: +約351,420円 ＆ すぐ受給開始）
+            </p>
+          </div>
         </div>
 
         <!-- ★ アフィリエイト提案導線カード（計算結果連動） -->
         <div class="bg-gradient-to-br from-amber-500/10 via-emerald-500/5 to-indigo-500/10 border-2 border-emerald-500/40 rounded-2xl p-5 shadow-sm space-y-3">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-black text-emerald-800 flex items-center">
+            <span class="text-xs font-black text-emerald-900 flex items-center">
               <i class="fa-solid fa-sparkles text-amber-500 mr-1.5"></i>
-              あなたの受給額を最大化するための次のステップ
+              あなたの受給額・手取りを最大化するための次のステップ
             </span>
             <span class="text-[9px] font-bold text-slate-400 bg-white px-2 py-0.5 rounded border border-slate-200">PR</span>
           </div>
@@ -261,14 +301,14 @@
     <section class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-4 text-xs text-slate-700 leading-relaxed">
       <h2 class="text-sm font-bold text-slate-900 flex items-center border-b border-slate-100 pb-2">
         <i class="fa-solid fa-book-open text-indigo-600 mr-2"></i>
-        計算式の仕組みと注意点について
+        計算式の仕組みと注意点について（2026年最新基準）
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <h3 class="font-bold text-slate-800 mb-1">失業保険（基本手当）の算出ロジック</h3>
           <p class="text-slate-600 text-[11px]">
-            退職前6ヶ月の賃金総額（賞与除く）を180で割って「賃金日額」を算出し、厚生労働省の給付率（約50%〜80%）を乗じて「基本手当日額」を決定します。年齢区分ごとの上限・下限額（2026年改定基準）を反映しています。
+            退職前6ヶ月の賃金総額（賞与除く）を180で割って「賃金日額」を算出し、厚生労働省の給付率（約50%〜80%）を乗じて「基本手当日額」を決定します。年齢区分ごとの上限額（30歳未満: 7,200円、30〜44歳: 7,900円、45〜59歳: 8,600円、60〜64歳: 7,400円）が適用されます。
           </p>
         </div>
         <div>
@@ -282,13 +322,13 @@
       <!-- FAQ -->
       <div class="pt-3 border-t border-slate-100 space-y-2">
         <h3 class="font-bold text-slate-800 text-xs">よくある質問（FAQ）</h3>
-        <details class="p-2 bg-slate-50 rounded-lg cursor-pointer">
+        <details class="p-2.5 bg-slate-50 rounded-lg cursor-pointer">
           <summary class="font-bold text-slate-800 text-[11px]">Q. 自己都合退職でもすぐに失業手当をもらう方法はありますか？</summary>
           <p class="text-slate-600 text-[11px] mt-1 pl-2">
             残業時間が一定基準（直前3ヶ月で月45時間超など）を超えている場合や、心身の体調不良による退職の場合、ハローワークで「特定理由離職者」と認定されれば、会社都合と同様に待期期間7日のみで給付が開始されます。
           </p>
         </details>
-        <details class="p-2 bg-slate-50 rounded-lg cursor-pointer">
+        <details class="p-2.5 bg-slate-50 rounded-lg cursor-pointer">
           <summary class="font-bold text-slate-800 text-[11px]">Q. 計算結果のデータは外部に送信されますか？</summary>
           <p class="text-slate-600 text-[11px] mt-1 pl-2">
             一切送信されません。すべての計算処理はお手元のブラウザ（スマホやPC）の端末内でのみ瞬時に行われるため、安心してお使いいただけます。
@@ -307,132 +347,206 @@
 
   <!-- フッター -->
   <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-6">
-    <div class="max-w-4xl mx-auto px-4">
+    <div class="max-w-5xl mx-auto px-4">
       <p>&copy; 2026 Free Online Calculators. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- 計算スクリプト -->
+  <!-- 計算スクリプト（完全リファクタリング版） -->
   <script>
-    const elSalary = document.getElementById('salary');
-    const elYears = document.getElementById('years');
-    const elAge = document.getElementById('age');
-    const elSeverance = document.getElementById('severance');
+    // 要素取得
+    const salaryRange = document.getElementById('salary-range');
+    const salaryNum = document.getElementById('salary-num');
+    const ageRange = document.getElementById('age-range');
+    const ageNum = document.getElementById('age-num');
+    const yearsRange = document.getElementById('years-range');
+    const yearsNum = document.getElementById('years-num');
+    const severanceRange = document.getElementById('severance-range');
+    const severanceNum = document.getElementById('severance-num');
     const reasons = document.getElementsByName('reason');
 
-    const elSalaryVal = document.getElementById('salary-val');
-    const elYearsVal = document.getElementById('years-val');
-    const elAgeVal = document.getElementById('age-val');
-    const elSeveranceVal = document.getElementById('severance-val');
+    const ageBadge = document.getElementById('age-badge');
+    const ageCapInfo = document.getElementById('age-cap-info');
+    const deductionInfo = document.getElementById('deduction-info');
 
-    const elTotal = document.getElementById('res-total');
-    const elUnemployment = document.getElementById('res-unemployment');
-    const elDays = document.getElementById('res-days');
-    const elSeveranceNet = document.getElementById('res-severance-net');
-    const elTax = document.getElementById('res-tax');
-    const elMonthly = document.getElementById('res-monthly');
-    const elStartTime = document.getElementById('res-start-time');
-    const elWaitDesc = document.getElementById('res-wait-desc');
+    const resTotal = document.getElementById('res-total');
+    const resUnemployment = document.getElementById('res-unemployment');
+    const resDays = document.getElementById('res-days');
+    const resDaily = document.getElementById('res-daily');
+    const resSeveranceNet = document.getElementById('res-severance-net');
+    const resTaxBadge = document.getElementById('res-tax-badge');
+    const resMonthly = document.getElementById('res-monthly');
+    const resStartTime = document.getElementById('res-start-time');
+    const resWaitDesc = document.getElementById('res-wait-desc');
+    const resRuleLabel = document.getElementById('res-rule-label');
+    const resCapStatus = document.getElementById('res-cap-status');
+    const resCompanyTotal = document.getElementById('res-company-total');
+    const resCompanyDiff = document.getElementById('res-company-diff');
+    const companyImpactBox = document.getElementById('company-impact-box');
 
+    // 双方向同期ヘルパー
+    function sync(elA, elB) {
+      elA.addEventListener('input', () => { elB.value = elA.value; calculate(); });
+      elB.addEventListener('input', () => { elA.value = elB.value; calculate(); });
+    }
+    sync(salaryRange, salaryNum);
+    sync(ageRange, ageNum);
+    sync(yearsRange, yearsNum);
+    sync(severanceRange, severanceNum);
+    for (const r of reasons) {
+      r.addEventListener('change', calculate);
+    }
+
+    // 計算コアロジック
     function calculate() {
-      const salary = parseInt(elSalary.value) * 10000;
-      const years = parseInt(elYears.value);
-      const age = parseInt(elAge.value);
-      const severance = parseInt(elSeverance.value) * 10000;
+      const salary = (parseFloat(salaryNum.value) || 0) * 10000;
+      const age = parseInt(ageNum.value) || 30;
+      const years = parseInt(yearsNum.value) || 1;
+      const severance = (parseFloat(severanceNum.value) || 0) * 10000;
 
       let reason = 'self';
       for (const r of reasons) {
         if (r.checked) { reason = r.value; break; }
       }
 
-      // 表示更新
-      elSalaryVal.textContent = (salary / 10000) + ' 万円';
-      elYearsVal.textContent = years + ' 年';
-      elAgeVal.textContent = age + ' 歳';
-      elSeveranceVal.textContent = (severance / 10000) + ' 万円';
+      // 1. 年齢区分の判定と上限額
+      let ageCategory = '30〜44歳';
+      let maxDaily = 7900;
+      if (age < 30) {
+        ageCategory = '30歳未満';
+        maxDaily = 7200;
+      } else if (age >= 30 && age < 45) {
+        ageCategory = '30〜44歳';
+        maxDaily = 7900;
+      } else if (age >= 45 && age < 60) {
+        ageCategory = '45〜59歳';
+        maxDaily = 8600;
+      } else {
+        ageCategory = '60〜64歳';
+        maxDaily = 7400;
+      }
+      ageBadge.textContent = `${ageCategory}の区分（${age}歳）`;
+      ageCapInfo.textContent = `日額上限: ${maxDaily.toLocaleString()}円`;
 
-      // 1. 失業保険の計算
-      // 賃金日額 = 直前6ヶ月の賃金 ÷ 180
+      // 2. 賃金日額 ＆ 基本手当日額
       const wageDaily = (salary * 6) / 180;
-
-      // 基本手当日額（概算率: 50%〜80%）
       let rate = 0.6;
       if (wageDaily < 5000) rate = 0.8;
-      else if (wageDaily > 12000) rate = 0.5;
-      else rate = 0.8 - (0.3 * (wageDaily - 5000) / 7000);
+      else if (wageDaily > 12500) rate = 0.5;
+      else rate = 0.8 - (0.3 * (wageDaily - 5000) / 7500);
 
-      let basicDaily = Math.floor(wageDaily * rate);
-      // 上限・下限ガード (2026年基準概算)
-      let maxDaily = 7200;
-      if (age >= 30 && age < 45) maxDaily = 7900;
-      else if (age >= 45 && age < 60) maxDaily = 8600;
-      else if (age >= 60) maxDaily = 7400;
+      let rawDaily = Math.floor(wageDaily * rate);
+      let basicDaily = rawDaily;
+      let isCapped = false;
+      if (basicDaily > maxDaily) {
+        basicDaily = maxDaily;
+        isCapped = true;
+      }
+      if (basicDaily < 2295) basicDaily = 2295; // 2026年下限概算
 
-      if (basicDaily > maxDaily) basicDaily = maxDaily;
-      if (basicDaily < 2200) basicDaily = 2200;
+      resDaily.textContent = `日額 ${basicDaily.toLocaleString()}円`;
+      resMonthly.textContent = `約 ${(basicDaily * 30).toLocaleString()} 円`;
+      resCapStatus.textContent = isCapped
+        ? `⚠️ 年齢上限（${maxDaily.toLocaleString()}円）適用中`
+        : `※年齢上限（${maxDaily.toLocaleString()}円）以内`;
 
-      // 給付日数判定
-      let days = 90;
-      if (reason === 'company') {
-        // 会社都合・特定受給資格者
-        if (years < 1) days = 90;
-        else if (years < 5) days = (age < 30) ? 120 : (age < 35) ? 150 : 180;
-        else if (years < 10) days = (age < 30) ? 180 : (age < 35) ? 210 : 240;
-        else if (years < 20) days = (age < 35) ? 240 : (age < 45) ? 270 : 330;
-        else days = 330;
-      } else {
-        // 自己都合
-        if (years < 10) days = 90;
-        else if (years < 20) days = 120;
-        else days = 150;
+      // 3. 給付日数判定（年齢 × 勤続年数 × 退職理由）
+      function getDays(targetReason, targetAge, targetYears) {
+        if (targetReason === 'company') {
+          // 会社都合・特定受給資格者
+          if (targetYears < 1) return 90;
+          if (targetYears < 5) {
+            if (targetAge < 30) return 120;
+            if (targetAge < 35) return 150;
+            if (targetAge < 45) return 180;
+            if (targetAge < 60) return 180;
+            return 150;
+          }
+          if (targetYears < 10) {
+            if (targetAge < 30) return 180;
+            if (targetAge < 35) return 210;
+            if (targetAge < 45) return 240;
+            if (targetAge < 60) return 240;
+            return 180;
+          }
+          if (targetYears < 20) {
+            if (targetAge < 30) return 180;
+            if (targetAge < 35) return 240;
+            if (targetAge < 45) return 270;
+            if (targetAge < 60) return 270;
+            return 210;
+          }
+          // 20年以上
+          if (targetAge < 35) return 240;
+          if (targetAge < 45) return 270;
+          if (targetAge < 60) return 330;
+          return 240;
+        } else {
+          // 自己都合
+          if (targetYears < 10) return 90;
+          if (targetYears < 20) return 120;
+          return 150;
+        }
       }
 
+      const days = getDays(reason, age, years);
+      const companyDays = getDays('company', age, years);
+
       const totalUnemployment = basicDaily * days;
+      const companyTotalUnemployment = basicDaily * companyDays;
+
+      resDays.textContent = `給付日数: ${days}日`;
+      resUnemployment.textContent = `約 ${totalUnemployment.toLocaleString()} 円`;
+      resRuleLabel.textContent = `${reason === 'company' ? '会社都合' : '自己都合'} / ${ageCategory}`;
 
       // 受給開始時期
       if (reason === 'company') {
-        elStartTime.textContent = '退職後 約 1ヶ月';
-        elWaitDesc.textContent = '7日間待期のみ（すぐ支給開始）';
+        resStartTime.textContent = '退職後 約 1ヶ月';
+        resWaitDesc.textContent = '7日間待期のみ（すぐ支給開始）';
+        companyImpactBox.classList.add('bg-emerald-50', 'border-emerald-200');
+        companyImpactBox.classList.remove('bg-slate-50', 'border-slate-200');
+        resCompanyTotal.textContent = `約 ${totalUnemployment.toLocaleString()} 円`;
+        resCompanyDiff.textContent = `現在会社都合が適用されています（満額最短受給）`;
       } else {
-        elStartTime.textContent = '退職後 約 2.5ヶ月';
-        elWaitDesc.textContent = '7日待期 ＋ 給付制限2ヶ月';
+        resStartTime.textContent = '退職後 約 2.5ヶ月';
+        resWaitDesc.textContent = '7日待期 ＋ 給付制限2ヶ月';
+        companyImpactBox.classList.remove('bg-emerald-50', 'border-emerald-200');
+        companyImpactBox.classList.add('bg-slate-50', 'border-slate-200');
+        resCompanyTotal.textContent = `約 ${companyTotalUnemployment.toLocaleString()} 円`;
+        const diff = companyTotalUnemployment - totalUnemployment;
+        resCompanyDiff.textContent = `給付日数: ${days}日 ➔ ${companyDays}日 (${diff > 0 ? '+約' + diff.toLocaleString() + '円' : '同日数'} ＆ 待期7日ですぐ支給)`;
       }
 
-      // 2. 退職金の手取り計算
+      // 4. 退職金の手取り計算
       let deduction = 800000;
       if (years <= 20) {
         deduction = Math.max(800000, 400000 * years);
       } else {
         deduction = 8000000 + (700000 * (years - 20));
       }
+      deductionInfo.textContent = `退職所得控除額: ${(deduction / 10000).toLocaleString()}万円（この金額まで完全非課税）`;
 
       let taxableSeverance = 0;
       let tax = 0;
       if (severance > deduction) {
         taxableSeverance = (severance - deduction) * 0.5;
-        // 所得税＋住民税＋復興税概算（約15%〜20%）
+        // 所得税＋住民税概算（約15%〜20%）
         tax = Math.floor(taxableSeverance * 0.15);
       }
-
       const severanceNet = Math.max(0, severance - tax);
 
-      // 3. サマリ表示
+      resSeveranceNet.textContent = `約 ${severanceNet.toLocaleString()} 円`;
+      if (tax === 0) {
+        resTaxBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800';
+        resTaxBadge.textContent = '控除内 (税額0円)';
+      } else {
+        resTaxBadge.className = 'px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800';
+        resTaxBadge.textContent = `想定税額: 約 ${tax.toLocaleString()}円`;
+      }
+
+      // 5. 合計サマリ
       const grandTotal = totalUnemployment + severanceNet;
-
-      elTotal.textContent = '約 ' + grandTotal.toLocaleString();
-      elUnemployment.textContent = '約 ' + totalUnemployment.toLocaleString() + ' 円';
-      elDays.textContent = '給付日数: ' + days + '日';
-      elSeveranceNet.textContent = '約 ' + severanceNet.toLocaleString() + ' 円';
-      elTax.textContent = tax === 0 ? '控除内 (税額0円)' : '想定税額: 約 ' + tax.toLocaleString() + '円';
-      elMonthly.textContent = '約 ' + (basicDaily * 30).toLocaleString() + ' 円';
-    }
-
-    elSalary.addEventListener('input', calculate);
-    elYears.addEventListener('input', calculate);
-    elAge.addEventListener('input', calculate);
-    elSeverance.addEventListener('input', calculate);
-    for (const r of reasons) {
-      r.addEventListener('change', calculate);
+      resTotal.textContent = `約 ${grandTotal.toLocaleString()}`;
     }
 
     calculate();
